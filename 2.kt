@@ -7,10 +7,10 @@ fun calculateCommission (cardType: String = "VK Pay", previousTransfers: Double 
         "mastercard", "maestro" ->
         {
             if (previousTransfers + transferAmount <= 75000) 0.0
-            else (transferAmount * 0.006).coerceAtLeast(20.0)
+            else (transferAmount * 0.006) + 20.0
         }
         "vk pay" -> 0.0
-        "мир" , "visa" -> (transferAmount * 0.0075).coerceAtLeast(35.0) // Комиссия для карт "Мир" и "Visa"
+        "мир" , "visa" -> (transferAmount * 0.0075).coerceAtLeast(35.0) 
         else -> -1.0
 
     }
@@ -19,7 +19,7 @@ fun calculateCommission (cardType: String = "VK Pay", previousTransfers: Double 
 fun main()
 {
     val amount = 86000.0
-    val cardType = "vk pay"
+    val cardType = "mastercard"
     val previousTransfers = 0.0
 
     val commission = calculateCommission(cardType, previousTransfers, amount)
